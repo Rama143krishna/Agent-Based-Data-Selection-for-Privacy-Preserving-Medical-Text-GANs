@@ -1,0 +1,7 @@
+Metric,Value
+BLEU Score,0.2691
+ROUGE Score,0.2552
+Distinct-1,0.0008
+Distinct-2,0.0055
+Self-BLEU,0.2739
+Privacy Leakage Rate,0.0

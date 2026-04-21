@@ -1,0 +1,858 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #ec4899;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --dark-bg: #0f172a;
+    --light-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+}
+
+/* ============================================
+   HEADER STYLES
+   ============================================ */
+.header {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--primary-color);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+/* ============================================
+   CONTAINER & LAYOUT
+   ============================================ */
+.container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.block {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid var(--primary-color);
+}
+
+.block:nth-child(2) {
+    border-left-color: var(--secondary-color);
+}
+
+.block:nth-child(3) {
+    border-left-color: var(--success-color);
+}
+
+.slide-in {
+    animation: slideIn 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.block-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+.run-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.run-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.run-btn.loading .btn-text::after {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-left: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   STATUS BAR STYLES
+   ============================================ */
+.status-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--light-bg);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--warning-color);
+}
+
+.status-bar.processing .status-dot {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.status-bar.success .status-dot {
+    background: var(--success-color);
+}
+
+.status-bar.error .status-dot {
+    background: var(--danger-color);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ============================================
+   GRID LAYOUT STYLES
+   ============================================ */
+.grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.grid-2col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.grid-item {
+    background: var(--light-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-item:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.grid-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.grid-content {
+    padding: 1.25rem;
+    min-height: 200px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.data-box {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    word-break: break-word;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+/* ============================================
+   SCROLLABLE TABLE STYLES
+   ============================================ */
+.scrollable-table {
+    overflow-y: auto;
+    overflow-x: auto;
+    max-height: 400px;
+    padding: 0;
+}
+
+.scrollable-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.75rem;
+}
+
+.scrollable-table thead {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    z-index: 10;
+}
+
+.scrollable-table th {
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #333;
+}
+
+.scrollable-table td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.scrollable-table tr:hover {
+    background-color: rgba(99, 102, 241, 0.05);
+}
+
+.scrollable-table tbody tr:nth-child(even) {
+    background-color: rgba(248, 250, 252, 0.5);
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+.scrollable-table::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.scrollable-table::-webkit-scrollbar-track {
+    background: var(--light-bg);
+    border-radius: 10px;
+}
+
+.scrollable-table::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+.scrollable-table::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* ============================================
+   EXAMPLES BOX - BEFORE/AFTER FORMAT
+   ============================================ */
+.examples-box {
+    overflow-y: auto;
+    max-height: 400px;
+    padding: 0;
+}
+
+.example-item {
+    padding: 1rem;
+    margin: 0.5rem;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.example-header {
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.example-before {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px dotted var(--border-color);
+}
+
+.example-before-label {
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.example-before-text {
+    font-size: 0.7rem;
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.example-after-label {
+    font-weight: 600;
+    color: var(--success-color);
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.example-after-text {
+    font-size: 0.7rem;
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.example-divider {
+    text-align: center;
+    color: var(--border-color);
+    font-size: 0.7rem;
+    margin: 0.75rem 0;
+    text-decoration: line-through;
+}
+
+/* ============================================
+   PLACEHOLDER & TEXT STYLES
+   ============================================ */
+.placeholder {
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* ============================================
+   METRICS TABLE STYLES
+   ============================================ */
+.metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.metrics-table thead {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.table-header th {
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.metrics-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.metrics-table td {
+    padding: 0.75rem;
+}
+
+.metrics-table tbody tr:hover {
+    background-color: rgba(99, 102, 241, 0.05);
+}
+
+.placeholder-row td {
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   PERFORMANCE METRICS TABLE
+   ============================================ */
+.performance-metrics tbody tr {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), transparent);
+    border-left: 4px solid transparent;
+}
+
+.performance-metrics tbody tr:nth-child(odd) {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), transparent);
+}
+
+.performance-metrics tbody tr:nth-child(1) {
+    border-left-color: #6366f1;
+}
+
+.performance-metrics tbody tr:nth-child(2) {
+    border-left-color: #ec4899;
+}
+
+.performance-metrics tbody tr:nth-child(3) {
+    border-left-color: #f59e0b;
+}
+
+.performance-metrics tbody tr:nth-child(4) {
+    border-left-color: #3b82f6;
+}
+
+.performance-metrics tbody tr:nth-child(5) {
+    border-left-color: #10b981;
+}
+
+.performance-metrics tbody tr:nth-child(6) {
+    border-left-color: #ef4444;
+}
+
+.performance-metrics td:last-child {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* ============================================
+   MODEL SCORES TABLE
+   ============================================ */
+.model-scores-table tbody tr {
+    border-left: 4px solid transparent;
+}
+
+.model-scores-table tbody tr:nth-child(1) {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), transparent);
+    border-left-color: #ec4899;
+}
+
+.model-scores-table tbody tr:nth-child(2) {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), transparent);
+    border-left-color: #3b82f6;
+}
+
+.model-scores-table tbody tr:nth-child(3) {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), transparent);
+    border-left-color: #10b981;
+}
+
+.model-scores-table tbody tr:nth-child(1) td:last-child {
+    color: #ec4899;
+    font-weight: 600;
+}
+
+.model-scores-table tbody tr:nth-child(2) td:last-child {
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.model-scores-table tbody tr:nth-child(3) td:last-child {
+    color: #10b981;
+    font-weight: 600;
+}
+
+/* ============================================
+   HYDRAGAN METRICS TABLE WITH COLORS
+   ============================================ */
+.hydragan-metrics tbody tr {
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+}
+
+/* BLEU Score - Purple */
+.hydragan-metrics tbody tr:nth-child(1) {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), transparent);
+    border-left-color: #6366f1;
+}
+
+.hydragan-metrics tbody tr:nth-child(1) td:last-child {
+    color: #6366f1;
+    font-weight: 700;
+}
+
+/* ROUGE Score - Pink */
+.hydragan-metrics tbody tr:nth-child(2) {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), transparent);
+    border-left-color: #ec4899;
+}
+
+.hydragan-metrics tbody tr:nth-child(2) td:last-child {
+    color: #ec4899;
+    font-weight: 700;
+}
+
+/* Distinct-1 - Orange */
+.hydragan-metrics tbody tr:nth-child(3) {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), transparent);
+    border-left-color: #f59e0b;
+}
+
+.hydragan-metrics tbody tr:nth-child(3) td:last-child {
+    color: #f59e0b;
+    font-weight: 700;
+}
+
+/* Distinct-2 - Blue */
+.hydragan-metrics tbody tr:nth-child(4) {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
+    border-left-color: #3b82f6;
+}
+
+.hydragan-metrics tbody tr:nth-child(4) td:last-child {
+    color: #3b82f6;
+    font-weight: 700;
+}
+
+/* Self-BLEU - Green */
+.hydragan-metrics tbody tr:nth-child(5) {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), transparent);
+    border-left-color: #10b981;
+}
+
+.hydragan-metrics tbody tr:nth-child(5) td:last-child {
+    color: #10b981;
+    font-weight: 700;
+}
+
+/* Privacy Leakage Rate - Green (Safe) */
+.hydragan-metrics tbody tr:nth-child(6) {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), transparent);
+    border-left-color: #10b981;
+}
+
+.hydragan-metrics tbody tr:nth-child(6) td:last-child {
+    color: #10b981;
+    font-weight: 700;
+}
+
+/* Hover effect for all metrics */
+.hydragan-metrics tbody tr:hover {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.05), transparent) !important;
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+.hydragan-metrics thead {
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    color: white;
+}
+
+.hydragan-metrics th {
+    padding: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+}
+
+.hydragan-metrics td {
+    padding: 1rem;
+    font-size: 0.95rem;
+}
+
+.hydragan-metrics td:first-child {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ============================================
+   FOOTER & BUTTONS
+   ============================================ */
+.block-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.download-btn {
+    background: linear-gradient(135deg, var(--success-color), #059669);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.download-btn.primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.download-btn.primary:hover {
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    background: rgba(15, 23, 42, 0.95);
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-top: 2px solid var(--primary-color);
+}
+
+.footer p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    .grid-2x2, .grid-2col {
+        grid-template-columns: 1fr;
+    }
+
+    .block-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .block {
+        padding: 1.5rem;
+    }
+
+    .scrollable-table,
+    .examples-box {
+        max-height: 300px;
+    }
+
+    .scrollable-table th,
+    .scrollable-table td {
+        padding: 0.4rem;
+        font-size: 0.7rem;
+    }
+
+    .metrics-table th,
+    .metrics-table td {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.2rem;
+    }
+
+    .block-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .grid-content {
+        min-height: 150px;
+        padding: 0.75rem;
+    }
+
+    .run-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+/* ============================================
+   ULTIMATE RGB CHROMA EFFECT
+   ============================================ */
+/* ============================================
+   COMPACT HEADER & ALIGNED LAYOUT
+   ============================================ */
+
+.header {
+    background: rgba(15, 23, 42, 0.98);
+    padding: 0.8rem 0; /* Reduced height significantly */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Small gap between title and bottom row */
+}
+
+/* 1. COMPACT SLOW RGB TITLE */
+.slow-rgb-title {
+    font-size: 1.8rem; /* Smaller font for smaller header */
+    font-weight: 800;
+    text-align: center;
+    margin: 0;
+    background: linear-gradient(
+        to right,
+        #6366f1, #ec4899, #10b981, #3b82f6, #6366f1
+    );
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: slowChroma 10s linear infinite;
+}
+
+/* 2. ALIGNMENT ROW (About + Names) */
+.bottom-row {
+    display: flex;
+    align-items: center; /* Vertically aligns About with Names */
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* 3. ABOUT BUTTON (LEFT & ALIGNED) */
+.nav-link-bottom-left {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border-radius: 4px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+
+    /* RGB Glow Border */
+    border: 1px solid transparent;
+    border-image: linear-gradient(to right, #ff0000, #00ff00, #0000ff) 1;
+
+    animation: buttonGlow 8s linear infinite;
+}
+
+/* 4. TEAM MEMBERS */
+.team-container {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    justify-content: center; /* Keeps names centered */
+}
+
+.team-member {
+    font-size: 0.75rem; /* Slightly smaller to match header height */
+    font-weight: 600;
+    padding: 4px 12px;
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 50px;
+    border: 1.5px solid transparent;
+}
+
+.member-indigo { color: #818cf8; border-color: #6366f1; }
+.member-pink { color: #f472b6; border-color: #ec4899; }
+.member-emerald { color: #34d399; border-color: #10b981; }
+
+.spacer { width: 80px; } /* Balances the 'About' button width on the right */
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes slowChroma {
+    to { background-position: 300% center; }
+}
+
+@keyframes buttonGlow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}

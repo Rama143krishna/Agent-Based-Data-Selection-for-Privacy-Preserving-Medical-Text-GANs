@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy ML Pipeline Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- HEADER -->
+<header class="header">
+    <div class="header-content">
+        <div class="logo-section">
+            <h1 class="slow-rgb-title">
+                Agent-Based Data Selection for Privacy-Preserving Medical Text GANs
+            </h1>
+        </div>
+
+        <div class="bottom-row">
+            <a href="#about" class="nav-link-bottom-left">About</a>
+
+            <div class="team-container">
+                <span class="team-member member-indigo">B. Dharmaramakrishna [AP25122040026]</span>
+                <span class="team-member member-pink">P. S. N. V. Prasad [AP25122040038]</span>
+                <span class="team-member member-emerald">J. Ravi Teja [AP25122040023]</span>
+            </div>
+
+            <div class="spacer"></div>
+        </div>
+    </div>
+</header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+
+        <!-- BLOCK 1: RANDOM FOREST PRIVACY AGENT -->
+        <section class="block slide-in" id="block1">
+            <div class="block-header">
+                <h2>🌲 Block 1: Random Forest Privacy Agent</h2>
+                <button class="run-btn" onclick="runBlock1()">
+                    <span class="btn-text">▶ Run</span>
+                </button>
+            </div>
+
+            <div class="status-bar" id="status1">
+                <span class="status-dot"></span> Ready
+            </div>
+
+            <!-- 2x2 Grid -->
+            <div class="grid-2x2">
+                <!-- Grid Item 1: Raw Data -->
+                <div class="grid-item">
+                    <div class="grid-header">📊 Raw Data <span id="block1-raw-count" class="row-count"></span></div>
+                    <div class="grid-content">
+                        <div id="block1-rawdata" class="data-box scrollable-table">
+                            <p class="placeholder">⏳ Waiting for data...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Item 2: Privacy Results -->
+                <div class="grid-item">
+                    <div class="grid-header">🔐 Privacy Results <span id="block1-privacy-count" class="row-count"></span></div>
+                    <div class="grid-content">
+                        <div id="block1-privacy" class="data-box scrollable-table">
+                            <p class="placeholder">⏳ Waiting for data...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Item 3: Safe Text for LLMs -->
+                <div class="grid-item">
+                    <div class="grid-header">✅ Safe Text for LLMs <span id="block1-safe-count" class="row-count"></span></div>
+                    <div class="grid-content">
+                        <div id="block1-safetext" class="data-box scrollable-table">
+                            <p class="placeholder">⏳ Waiting for data...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Item 4: RF Model Metrics -->
+                <div class="grid-item">
+                    <div class="grid-header">📈 RF Model Metrics</div>
+                    <div class="grid-content">
+                        <table id="block1-metrics" class="metrics-table">
+                            <thead>
+                                <tr class="table-header">
+                                    <th>Metric</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="placeholder-row">
+                                    <td colspan="2">⏳ Processing...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block-footer">
+                <button class="download-btn" onclick="downloadBlock1()">
+                    ⬇ Download Block 1 Output
+                </button>
+            </div>
+        </section>
+
+        <!-- BLOCK 2: HYBRID BIOGPT + LLAMA -->
+        <section class="block slide-in" id="block2" style="animation-delay: 0.2s;">
+            <div class="block-header">
+                <h2>🧠 Block 2: Hybrid BioGPT + LLAMA</h2>
+                <button class="run-btn" onclick="runBlock2()">
+                    <span class="btn-text">▶ Run</span>
+                </button>
+            </div>
+
+            <div class="status-bar" id="status2">
+                <span class="status-dot"></span> Ready
+            </div>
+
+            <!-- ✅ 2x2 GRID FOR BLOCK 2 -->
+            <div class="grid-2x2">
+                <!-- Grid Item 1: RF vs LLM Diff -->
+                <div class="grid-item">
+                    <div class="grid-header">⚖️ RF vs LLM Diff <span id="block2-rf-vs-llm-count" class="row-count"></span></div>
+                    <div class="grid-content">
+                        <div id="block2-rf-vs-llm" class="data-box scrollable-table">
+                            <p class="placeholder">⏳ Waiting for data...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Item 2: Overall Performance -->
+                <div class="grid-item">
+                    <div class="grid-header">🎯 Overall Performance</div>
+                    <div class="grid-content">
+                        <table id="block2-overall-performance" class="metrics-table performance-metrics">
+                            <thead>
+                                <tr class="table-header">
+                                    <th>Metric</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="placeholder-row">
+                                    <td colspan="2">⏳ Processing...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Grid Item 3: 20 Sample Examples -->
+                <div class="grid-item">
+                    <div class="grid-header">📋 20 Sample Examples <span id="block2-examples-count" class="row-count"></span></div>
+                    <div class="grid-content">
+                        <div id="block2-examples" class="data-box examples-box">
+                            <p class="placeholder">⏳ Waiting for examples...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Item 4: Model Scores -->
+                <div class="grid-item">
+                    <div class="grid-header">🧠 Model Scores</div>
+                    <div class="grid-content">
+                        <table id="block2-model-scores" class="metrics-table model-scores-table">
+                            <thead>
+                                <tr class="table-header">
+                                    <th>Model</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="placeholder-row">
+                                    <td colspan="2">⏳ Processing...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Grid Item 5: Approved Text for GAN (Full width) -->
+                <div class="grid-item" style="grid-column: 1 / -1;">
+                    <div class="grid-header">✔️ Approved Text for GAN <span id="block2-approved-count" class="row-count"></span></div>
+                    <div class="grid-content">
+                        <div id="block2-approved" class="data-box scrollable-table">
+                            <p class="placeholder">⏳ Waiting for approved text...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block-footer">
+                <button class="download-btn" onclick="downloadBlock2()">
+                    ⬇ Download Block 2 Output
+                </button>
+            </div>
+        </section>
+
+        <!-- BLOCK 3: HYDRAGAN FINAL OUTPUT -->
+        <section class="block slide-in" id="block3" style="animation-delay: 0.4s;">
+            <div class="block-header">
+                <h2>🎨 Block 3: HydraGAN Final Output</h2>
+                <button class="run-btn" onclick="runBlock3()">
+                    <span class="btn-text">▶ Run</span>
+                </button>
+            </div>
+
+            <div class="status-bar" id="status3">
+                <span class="status-dot"></span> Ready
+            </div>
+
+            <!-- 2-Column Grid -->
+            <div class="grid-2col">
+                <!-- Column 1: Synthetic Text -->
+                <div class="grid-item">
+                    <div class="grid-header">🤖 Final Synthetic Text Output <span id="block3-synthetic-count" class="row-count"></span></div>
+                    <div class="grid-content">
+                        <div id="block3-synthetic" class="data-box scrollable-table" style="min-height: 250px;">
+                            <p class="placeholder">⏳ Generating synthetic data...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: HydraGAN Performance -->
+                <div class="grid-item">
+                    <div class="grid-header">🏆 HydraGAN Performance</div>
+                    <div class="grid-content">
+                        <table id="block3-performance" class="metrics-table hydragan-metrics">
+                            <thead>
+                                <tr class="table-header">
+                                    <th>Metric</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="placeholder-row">
+                                    <td colspan="2">⏳ Processing...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block-footer">
+                <button class="download-btn primary" onclick="downloadBlock3()">
+                    ⬇ Download Final Output
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="about">
+        <p>Privacy-Preserving ML Pipeline | Random Forest + Hybrid BioGPT/LLAMA + HydraGAN</p>
+        <p>All outputs are automatically saved to RF/, HYBRID/, HYDRA/ folders</p>
+    </footer>
+
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
